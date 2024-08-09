@@ -3,18 +3,31 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const portfolioRoutes = require('./routes/portfolioRoutes'); // Ensure this path is correct
+const portfolioRoutes = require('./routes/portfolioRoutes'); 
 
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Define allowed origins
+const allowedOrigins = [
+  "https://portfolio-anshbansal18-ansh-bansals-projects.vercel.app",
+  "https://vercel.com/ansh-bansals-projects/portfolio/FSdPjQtP7LFSNueixWzoFc5h9t6n",
+  "https://portfolio-1bsok3ssr-ansh-bansals-projects.vercel.app"
+];
+
 // Middleware to parse JSON and enable CORS
 app.use(express.json());
 app.use(cors({
-  origin: "https://portfolio-anshbansal18-ansh-bansals-projects.vercel.app/",
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type',
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type']
 }));
 
 // Portfolio API route
