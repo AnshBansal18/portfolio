@@ -299,9 +299,9 @@ router.post('/delete-project', async (req, res) => {
 // Admin Login
 router.post("/admin-login", async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username, password: req.body.password })
-        user.password = "";
+        const user = await User.findOne({ username: req.body.username, password: req.body.password });
         if (user) {
+            user.password = ""; // Remove password from response
             res.status(200).send({
                 data: user,
                 success: true,
@@ -309,15 +309,14 @@ router.post("/admin-login", async (req, res) => {
             });
         } else {
             res.status(200).send({
-                daat: user,
+                data: user,
                 success: false,
                 message: "Invalid username or password",
             });
         }
-
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send({ error: error.message });
     }
-})
+});
 
 module.exports = router; 
