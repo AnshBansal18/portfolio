@@ -11,12 +11,10 @@ const port = process.env.PORT || 5000;
 
 // Middleware to parse JSON and enable CORS
 app.use(express.json());
-
-// Set up CORS
 app.use(cors({
-  origin: process.env.CLIENT_URL || '*', // Allow all origins if CLIENT_URL is not defined
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type'],
+  origin: "https://portfolio-608q0nw0m-ansh-bansals-projects.vercel.app",
+  methods: 'GET,POST,PUT,DELETE',
+  allowedHeaders: 'Content-Type',
 }));
 
 // Portfolio API route
