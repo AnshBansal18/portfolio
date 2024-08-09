@@ -286,9 +286,9 @@ router.post('/api/portfolio/update-project/:id', async (req, res) => {
 });
 
 // Route to delete a project
-router.post('/api/portfolio/delete-project', async (req, res) => {
+router.post('/api/portfolio/delete-project/:id', async (req, res) => {
     try {
-        await Project.findByIdAndDelete(req.body.projectId);
+        await Project.findByIdAndDelete(req.params.id);
         const projects = await Project.find(); // Fetch updated project list
         res.status(200).send({ projects });
     } catch (error) {
@@ -296,27 +296,4 @@ router.post('/api/portfolio/delete-project', async (req, res) => {
     }
 });
 
-// Admin Login
-router.post("/api/portfolio/admin-login", async (req, res) => {
-    try {
-        const user = await User.findOne({ username: req.body.username, password: req.body.password });
-        if (user) {
-            user.password = ""; // Remove password from response
-            res.status(200).send({
-                data: user,
-                success: true,
-                message: "Login successfully"
-            });
-        } else {
-            res.status(200).send({
-                data: user,
-                success: false,
-                message: "Invalid username or password",
-            });
-        }
-    } catch (error) {
-        res.status(500).send({ error: error.message });
-    }
-});
-
-module.exports = router; 
+module.exports = router;
