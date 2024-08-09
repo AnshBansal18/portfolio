@@ -11,6 +11,7 @@ const port = process.env.PORT || 5000;
 
 // Define allowed origins
 const allowedOrigins = [
+  "https://portfolio-pied-two-98.vercel.app",
   "https://portfolio-anshbansal18-ansh-bansals-projects.vercel.app",
   "https://vercel.com/ansh-bansals-projects/portfolio/FSdPjQtP7LFSNueixWzoFc5h9t6n",
   "https://portfolio-1bsok3ssr-ansh-bansals-projects.vercel.app"

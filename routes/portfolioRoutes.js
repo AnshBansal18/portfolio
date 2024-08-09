@@ -31,7 +31,7 @@ router.get('/get-portfolio-data', async (req, res) => {
 });
 
 // Update intro
-router.post('/update-intro', async (req, res) => {
+router.post('/api/portfolio/update-intro', async (req, res) => {
     try {
         const intro = await Intro.findOneAndUpdate(
             { _id: req.body._id },
@@ -56,7 +56,7 @@ router.post('/update-intro', async (req, res) => {
 });
 
 // Update about
-router.post('/update-about', async (req, res) => {
+router.post('/api/portfolio/update-about', async (req, res) => {
     try {
         const about = await About.findOneAndUpdate(
             { _id: req.body._id },
@@ -81,7 +81,7 @@ router.post('/update-about', async (req, res) => {
 });
 
 // Add new category in about
-router.post('/add-category', async (req, res) => {
+router.post('/api/portfolio/add-category', async (req, res) => {
     try {
         const about = await About.findOne();
         if (about) {
@@ -105,7 +105,7 @@ router.post('/add-category', async (req, res) => {
 });
 
 // Delete category from about
-router.post('/delete-category', async (req, res) => {
+router.post('/api/portfolio/delete-category', async (req, res) => {
     try {
         const about = await About.findOne();
         if (about) {
@@ -129,7 +129,7 @@ router.post('/delete-category', async (req, res) => {
 });
 
 // Add skill to a category
-router.post('/add-skill', async (req, res) => {
+router.post('/api/portfolio/add-skill', async (req, res) => {
     try {
         const about = await About.findOne();
         if (about) {
@@ -158,7 +158,7 @@ router.post('/add-skill', async (req, res) => {
 });
 
 // Delete skill from a category
-router.post('/delete-skill', async (req, res) => {
+router.post('/api/portfolio/delete-skill', async (req, res) => {
     try {
         const about = await About.findOne();
         if (about) {
@@ -187,7 +187,7 @@ router.post('/delete-skill', async (req, res) => {
 });
 
 // Update footer
-router.post('/update-footer', async (req, res) => {
+router.post('/api/portfolio/update-footer', async (req, res) => {
     try {
         const footer = await Footer.findOneAndUpdate(
             { _id: req.body._id },
@@ -212,7 +212,7 @@ router.post('/update-footer', async (req, res) => {
 });
 
 // Route to update the nav data
-router.post('/update-nav', async (req, res) => {
+router.post('/api/portfolio/update-nav', async (req, res) => {
     try {
         const { nav } = req.body;
         const updatedNav = await NavigationData.findOneAndUpdate(
@@ -238,7 +238,7 @@ router.post('/update-nav', async (req, res) => {
 });
 
 // Update contact
-router.post('/update-contact', async (req, res) => {
+router.post('/api/portfolio/update-contact', async (req, res) => {
     try {
         const { contact } = req.body;
 
@@ -262,11 +262,11 @@ router.post('/update-contact', async (req, res) => {
 });
 
 // Route to add a new project
-router.post('/add-project', async (req, res) => {
+router.post('/api/portfolio/add-project', async (req, res) => {
     try {
         const newProject = new Project(req.body);
         await newProject.save();
-        const projects = await Project.find(); // Fetch updated project list
+        const projects = await Project.find(); 
         res.status(201).send({ projects });
     } catch (error) {
         res.status(500).send({ message: 'Error adding project', error: error.message });
@@ -274,7 +274,7 @@ router.post('/add-project', async (req, res) => {
 });
 
 // Route to update an existing project
-router.post('/update-project/:id', async (req, res) => {
+router.post('/api/portfolio/update-project/:id', async (req, res) => {
     try {
         const project = await Project.findByIdAndUpdate(req.params.id, req.body, { new: true });
         if (!project) return res.status(404).send({ message: 'Project not found' });
@@ -286,7 +286,7 @@ router.post('/update-project/:id', async (req, res) => {
 });
 
 // Route to delete a project
-router.post('/delete-project', async (req, res) => {
+router.post('/api/portfolio/delete-project', async (req, res) => {
     try {
         await Project.findByIdAndDelete(req.body.projectId);
         const projects = await Project.find(); // Fetch updated project list
@@ -297,7 +297,7 @@ router.post('/delete-project', async (req, res) => {
 });
 
 // Admin Login
-router.post("/admin-login", async (req, res) => {
+router.post("/api/portfolio/admin-login", async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username, password: req.body.password });
         if (user) {
