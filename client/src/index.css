@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.admin-header {
+    @apply p-6 bg-gray-900 text-white;
+}
+
+.data-list {
+    @apply mb-6;
+}
+
+.data-item {
+    @apply flex items-center justify-between mb-4 p-4 bg-gray-800 rounded-md;
+}
+
+.add-item {
+    @apply mt-6;
+}
+
+input[type="text"] {
+    @apply p-2 border border-gray-600 rounded-md;
+}
+
+button {
+    @apply ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700;
+}

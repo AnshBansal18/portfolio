@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.main-content {
+    background-image: 
+        linear-gradient(135deg, rgba(35, 35, 35, 1) 0%, rgba(50, 50, 50, 1) 100%),
+        linear-gradient(45deg, rgba(25, 25, 25, 0.9) 0%, rgba(35, 35, 35, 0.9) 100%),
+        repeating-linear-gradient(0deg, rgba(17, 17, 17, 0.7) 0px, rgba(17, 17, 17, 0.7) 1px, transparent 1px, transparent 51px),
+        repeating-linear-gradient(90deg, rgba(17, 17, 17, 0.7) 0px, rgba(17, 17, 17, 0.7) 1px, transparent 1px, transparent 51px);
+    background-size: cover, cover, 50px 50px, 50px 50px;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+}
+
