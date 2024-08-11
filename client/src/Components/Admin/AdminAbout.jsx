@@ -184,5 +184,4 @@ const AdminAbout = () => {
     </Container>
   );
 };
-
 export default AdminAbout;

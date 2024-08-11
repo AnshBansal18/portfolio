@@ -84,28 +84,15 @@ const Admin = () => {
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
           }}
         >
-          <TabPanel value="0">
-            <AdminIntro />
-          </TabPanel>
-          <TabPanel value="1">
-            <AdminAbout />
-          </TabPanel>
-          <TabPanel value="2">
-            <AdminHeader />
-          </TabPanel>
-          <TabPanel value="3">
-            <AdminFooter />
-          </TabPanel>
-          <TabPanel value="4">
-            <AdminContact />
-          </TabPanel>
-          <TabPanel value="5">
-            <AdminProject />
-          </TabPanel>
+          <TabPanel value="0"> <AdminIntro /> </TabPanel>
+          <TabPanel value="1"> <AdminAbout /> </TabPanel>
+          <TabPanel value="2"> <AdminHeader /> </TabPanel>
+          <TabPanel value="3"> <AdminFooter /> </TabPanel>
+          <TabPanel value="4"> <AdminContact /> </TabPanel>
+          <TabPanel value="5"> <AdminProject /> </TabPanel>
         </div>
       </TabContext>
     </Paper>
   );
 };
-
 export default Admin;

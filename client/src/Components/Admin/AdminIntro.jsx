@@ -122,5 +122,4 @@ const ResponsiveForm = () => {
     </Container>
   );
 };
-
 export default ResponsiveForm;

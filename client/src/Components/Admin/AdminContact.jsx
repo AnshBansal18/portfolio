@@ -163,5 +163,4 @@ const AdminContact = () => {
     </Container>
   );
 };
-
 export default AdminContact;
