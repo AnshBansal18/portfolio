@@ -36,3 +36,4 @@ Thumbs.db
 # Miscellaneous
 *.sublime-project
 *.sublime-workspace
+.vercel
