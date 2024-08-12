@@ -10,17 +10,20 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// CORS configuration
 app.use(cors({
-  origin: '*',
+  origin: 'https://anshbansal.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type'],
 }));
 
-app.use(express.json());
+app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
 
+// Portfolio API route
 app.use('/api/portfolio', portfolioRoutes);
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -31,6 +34,7 @@ mongoose.connect(process.env.MONGO_URI, {
     process.exit(1);
   });
 
+// Email sending route
 app.post('/send-email', async (req, res) => {
   const { name, email, message } = req.body;
 
