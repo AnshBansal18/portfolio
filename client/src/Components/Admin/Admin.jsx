@@ -95,8 +95,4 @@ const Admin = () => {
     </Paper>
   );
 };
-<<<<<<< HEAD
 export default Admin;
-=======
-export default Admin;
->>>>>>> 313f8ed5a1773c4c75b6d11bec26b75faee19eb1
