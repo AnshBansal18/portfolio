@@ -10,15 +10,15 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// CORS configuration
+// Middleware
 app.use(cors({
-  origin: 'https://anshbansal.vercel.app',
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type'],
 }));
 
 app.use(express.json()); 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); 
 
 // Portfolio API route
 app.use('/api/portfolio', portfolioRoutes);
