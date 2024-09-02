@@ -184,8 +184,4 @@ const AdminAbout = () => {
     </Container>
   );
 };
-<<<<<<< HEAD
 export default AdminAbout;
-=======
-export default AdminAbout;
->>>>>>> 313f8ed5a1773c4c75b6d11bec26b75faee19eb1
