@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FaEnvelope, FaPhoneAlt, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Contact = () => {
-  const [contactData, setContactData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -14,22 +11,17 @@ const Contact = () => {
   const [formError, setFormError] = useState('');
   const [formSuccess, setFormSuccess] = useState('');
 
-  useEffect(() => {
-    const fetchContactData = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_BASE_URL}/api/portfolio/get-portfolio-data`);
-        if (!response.ok) throw new Error('Failed to fetch');
-        const data = await response.json();
-        setContactData(data.contact);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContactData();
-  }, []);
+  // Static contact data
+  const contactData = {
+    email: 'anshbansal2004@gmail.com',
+    phone: '9015530660',
+    socialMediaLinks: {
+      github: 'https://github.com/AnshBansal18',
+      linkedin: 'http://www.linkedin.com/in/ansh-bansal04',
+      twitter: 'https://x.com/anshban96221431',
+      instagram: 'https://www.instagram.com/anshbansal.18',
+    },
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +59,7 @@ const Contact = () => {
     }
   };
 
-  const socialMedia = contactData?.socialMediaLinks || {};
+  const socialMedia = contactData.socialMediaLinks;
 
   return (
     <section className="bg-custom-bg text-white min-h-screen py-12 px-4 md:px-8 lg:px-16">
@@ -80,13 +72,13 @@ const Contact = () => {
           <div className="flex-1 mb-6 md:mb-0">
             <p className="text-lg mb-4 flex items-center">
               <FaEnvelope className="text-blue-400 text-2xl mr-4" />
-              <a href={`mailto:${contactData?.email}`} className="hover:underline">
-                {contactData?.email || 'Email not available'}
+              <a href={`mailto:${contactData.email}`} className="hover:underline">
+                {contactData.email}
               </a>
             </p>
             <p className="text-lg flex items-center">
               <FaPhoneAlt className="text-green-400 text-2xl mr-4" />
-              {contactData?.phone || 'Phone not available'}
+              {contactData.phone}
             </p>
           </div>
           <div className="flex items-center space-x-6">
@@ -128,7 +120,7 @@ const Contact = () => {
         <form onSubmit={handleSubmit} className="space-y-6 bg-custom-bg p-8 rounded-lg shadow-lg">
           {formError && <div className="text-red-500">{formError}</div>}
           {formSuccess && <div className="text-green-500">{formSuccess}</div>}
-          <h2 class="text-2xl md:text-4xl font-bold text-center bg-gradient-to-r from-yellow-500 via-red-500 to-green-500 text-transparent bg-clip-text my-4 md:my-8">
+          <h2 className="text-2xl md:text-4xl font-bold text-center bg-gradient-to-r from-yellow-500 via-red-500 to-green-500 text-transparent bg-clip-text my-4 md:my-8">
             Reach Out via the Form
           </h2>
 
