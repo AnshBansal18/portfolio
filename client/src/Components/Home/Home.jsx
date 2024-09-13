@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 
 const Home = () => {
-  const { portfolioData } = useSelector((state) => state.root);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (portfolioData && portfolioData.intro) {
-      setLoading(false);
-    }
-  }, [portfolioData]);
-
-  if (loading) {
-    return (
-      <section className="bg-custom-bg text-white min-h-screen flex items-center justify-center">
-        <div className="w-12 h-12 border-t-4 border-b-4 border-gradient-to-r from-red-500 to-yellow-500 rounded-full animate-spin"></div>
-      </section>
-    );
-  }
 
   const handleKnowMoreClick = () => {
     navigate('/about');
@@ -30,10 +13,10 @@ const Home = () => {
     <section className="bg-custom-bg text-white min-h-screen flex flex-col items-center justify-center p-8 md:p-12 lg:p-16">
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 mt-6 bg-gradient-to-r from-red-500 to-yellow-500 text-transparent bg-clip-text">
-          Hi, I’m {portfolioData.intro.fullName}
+          Hi, I’m Ansh Bansal
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl mb-8 leading-relaxed max-w-xl mx-auto">
-          {portfolioData.intro.caption} {portfolioData.intro.description}
+          I’m a third-year Computer Applications student with a strong passion for Full Stack Development. I specialize in turning creative ideas into dynamic web experiences, balancing both design and performance. Beyond coding, I stay current with web trends and love experimenting with new design concepts. I’m an enthusiastic and quick learner with a strong drive to continuously enhance my skills.
         </p>
         <button
           onClick={handleKnowMoreClick}

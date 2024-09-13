@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiHome, FiUser, FiMail, FiLayers} from 'react-icons/fi';
-import { RiMenu4Fill } from "react-icons/ri";
-import axios from 'axios';
+import { FiHome, FiUser, FiMail, FiLayers } from 'react-icons/fi';
+import { RiMenu4Fill } from 'react-icons/ri';
 
-const iconMap = {FiHome,FiUser,FiMail,FiLayers,
+const iconMap = {
+  FiHome,
+  FiUser,
+  FiMail,
+  FiLayers,
 };
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navData, setNavData] = useState({ logo: '', name: '', navItems: [] });
-
-  useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_REACT_APP_API_BASE_URL}/api/portfolio/get-portfolio-data`)
-      .then((response) => {
-        if (response.data.nav) {
-          setNavData(response.data.nav);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching navigation data:', error);
-      });
-  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  const navData = {
+    logo: 'https://res.cloudinary.com/dl2qgtamc/image/upload/v1723125399/Screenshot_2024-08-08_192614_s2i0w9.png',
+    name: 'Ansh Bansal',
+    navItems: [
+      { name: 'Home', path: '/', icon: 'FiHome' },
+      { name: 'About', path: '/about', icon: 'FiUser' },
+      { name: 'Contacts', path: '/contacts', icon: 'FiMail' },
+      { name: 'Projects', path: '/projects', icon: 'FiLayers' },
+    ],
+  };
 
   return (
     <header className="bg-transparent backdrop-blur-sm text-white py-3 fixed w-full top-0 z-50 flex items-center justify-between px-4">
@@ -43,7 +43,6 @@ const Header = () => {
                 <Icon className="mr-2 text-xl" />
                 {item.name}
               </Link>
-
             )
           );
         })}
@@ -51,7 +50,7 @@ const Header = () => {
 
       <div className="md:hidden">
         <button onClick={toggleMenu} aria-label="Toggle menu" className="text-2xl bg-transparent">
-          <RiMenu4Fill  />
+          <RiMenu4Fill />
         </button>
       </div>
 

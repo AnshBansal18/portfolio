@@ -2,10 +2,7 @@ import React from 'react';
 import { Typography, Tabs, Tab, Paper, Button } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { useNavigate } from 'react-router-dom';
-import AdminIntro from './AdminIntro';
 import AdminAbout from './AdminAbout';
-import AdminHeader from './AdminHeader';
-import AdminFooter from './AdminFooter';
 import AdminContact from './AdminContact';
 import AdminProject from './AdminProject';
 
@@ -68,10 +65,7 @@ const Admin = () => {
               },
             }}
           >
-            <Tab label="Intro" value="0" sx={{ color: '#fff' }} />
             <Tab label="About" value="1" sx={{ color: '#fff' }} />
-            <Tab label="Header" value="2" sx={{ color: '#fff' }} />
-            <Tab label="Footer" value="3" sx={{ color: '#fff' }} />
             <Tab label="Contacts" value="4" sx={{ color: '#fff' }} />
             <Tab label="Projects" value="5" sx={{ color: '#fff' }} />
           </TabList>
@@ -84,10 +78,7 @@ const Admin = () => {
             boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
           }}
         >
-          <TabPanel value="0"> <AdminIntro /> </TabPanel>
           <TabPanel value="1"> <AdminAbout /> </TabPanel>
-          <TabPanel value="2"> <AdminHeader /> </TabPanel>
-          <TabPanel value="3"> <AdminFooter /> </TabPanel>
           <TabPanel value="4"> <AdminContact /> </TabPanel>
           <TabPanel value="5"> <AdminProject /> </TabPanel>
         </div>
