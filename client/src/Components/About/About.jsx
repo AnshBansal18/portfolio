@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import ImageComponent from './ImageComponent';
+import SkillsSection from './SkillsSection';
 
 const fetchPortfolioData = async () => {
   const response = await axios.get(`${import.meta.env.VITE_REACT_APP_API_BASE_URL}/api/portfolio/get-portfolio-data`);
@@ -20,8 +21,10 @@ const About = () => {
   if (error) return <p className="text-center text-red-500">Error: {error.message}</p>;
   if (!data) return <p className="text-center bg-custom-bg text-white">No data found</p>;
 
-  const { about } = data;
-  const { description, imageUrl, whatIKnow } = about;
+  const { whatIKnow } = data.about;
+
+  const description = "Hello, I’m Ansh Bansal, a dedicated third-year undergraduate in Computer Applications, born and raised in Delhi. I specialize in both Front-End and Back-End technologies, fueled by a strong curiosity and a commitment to continuous learning. My focus is on staying at the forefront of web development by exploring cutting-edge frameworks and refining a diverse set of technical skills. If you share a passion for technology or are interested in connecting professionally, I’d love to hear from you!";
+  const imageUrl = "https://res.cloudinary.com/dl2qgtamc/image/upload/v1723020035/WhatsApp_Image_2024-08-07_at_2.10.05_PM_oh0tko.jpg";
 
   return (
     <main className="bg-custom-bg text-white min-h-screen py-16 px-6 sm:px-10 lg:px-20">
@@ -38,37 +41,7 @@ const About = () => {
           <ImageComponent src={imageUrl} />
         </figure>
       </section>
-      <section className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-semibold mb-4 bg-gradient-to-r from-yellow-500 via-orange-600 to-red-600 text-transparent bg-clip-text">
-          I am Familiar With
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {whatIKnow && whatIKnow.length > 0 ? (
-            whatIKnow.map((category) => (
-              <article
-                key={category._id}
-                className="bg-transparent p-8 rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
-              >
-                <h3 className="text-2xl md:text-3xl font-bold mb-6 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 text-transparent bg-clip-text">
-                  {category.category}
-                </h3>
-                <div className="flex flex-wrap gap-4">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill._id}
-                      className="bg-gray-500 px-4 py-2 rounded-full text-sm text-white hover:bg-gray-800 transition-colors duration-300"
-                    >
-                      {skill.skillName}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))
-          ) : (
-            <p className="text-center text-gray-400">No skills available</p>
-          )}
-        </div>
-      </section>
+      <SkillsSection whatIKnow={whatIKnow} />
     </main>
   );
 };
