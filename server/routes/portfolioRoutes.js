@@ -6,20 +6,12 @@ const User = require('../models/userModel');
 // Get portfolio data
 router.get('/get-portfolio-data', async (req, res) => {
     try {
-        const intro = await Intro.findOne();
         const about = await About.findOne();
         const projects = await Project.find();
-        const contact = await Contact.findOne();
-        const nav = await NavigationData.findOne();
-        const footer = await Footer.findOne();
 
         res.status(200).send({
-            intro: intro || null,
             about: about || null,
             projects: projects || [],
-            contact: contact || null,
-            nav: nav || defaultNavData,
-            footer: footer || defaultFooterData
         });
     } catch (error) {
         console.error('Error fetching portfolio data:', error);
@@ -30,30 +22,6 @@ router.get('/get-portfolio-data', async (req, res) => {
     }
 });
 
-// Update intro
-router.post('/update-intro', async (req, res) => {
-    try {
-        const intro = await Intro.findOneAndUpdate(
-            { _id: req.body._id },
-            req.body,
-            { new: true, runValidators: true }
-        );
-        if (!intro) {
-            return res.status(404).send({ message: 'Intro not found.' });
-        }
-        res.status(200).send({
-            data: intro,
-            success: true,
-            message: "Intro updated successfully"
-        });
-    } catch (error) {
-        console.error('Error updating intro:', error);
-        res.status(500).send({
-            message: 'An error occurred while updating intro.',
-            error: error.message
-        });
-    }
-});
 
 // Update about
 router.post('/update-about', async (req, res) => {
@@ -183,85 +151,6 @@ router.post('/delete-skill', async (req, res) => {
             message: 'An error occurred while deleting skill.',
             error: error.message
         });
-    }
-});
-
-// Update footer
-router.post('/update-footer', async (req, res) => {
-    try {
-        const footer = await Footer.findOneAndUpdate(
-            { _id: req.body._id },
-            req.body,
-            { new: true, runValidators: true }
-        );
-        if (!footer) {
-            return res.status(404).send({ message: 'Footer not found.' });
-        }
-        res.status(200).send({
-            data: footer,
-            success: true,
-            message: "Footer updated successfully"
-        });
-    } catch (error) {
-        console.error('Error updating footer:', error);
-        res.status(500).send({
-            message: 'An error occurred while updating footer.',
-            error: error.message
-        });
-    }
-});
-
-// Route to update the nav data
-router.post('/update-nav', async (req, res) => {
-    try {
-        const { nav } = req.body;
-        const updatedNav = await NavigationData.findOneAndUpdate(
-            { _id: nav._id },
-            nav,
-            { new: true, runValidators: true }
-        );
-        if (!updatedNav) {
-            return res.status(404).json({ message: 'Navigation data not found.' });
-        }
-        res.status(200).json({
-            data: updatedNav,
-            success: true,
-            message: "Nav updated successfully"
-        });
-    } catch (error) {
-        console.error('Error updating nav:', error);
-        res.status(500).json({
-            message: 'An error occurred while updating nav.',
-            error: error.message
-        });
-    }
-});
-
-// Update contact
-router.post('/update-contact', async (req, res) => {
-    try {
-        const { contact } = req.body;
-
-        if (!contact || !contact._id) {
-            return res.status(400).json({ message: 'Contact data and _id are required' });
-        }
-
-        console.log('Received contact data:', contact);
-
-        const updatedContact = await Contact.findOneAndUpdate(
-            { _id: contact._id },
-            contact,
-            { new: true, runValidators: true }
-        );
-
-        if (!updatedContact) {
-            return res.status(404).json({ message: 'Contact not found' });
-        }
-
-        res.status(200).json({ contact: updatedContact });
-    } catch (error) {
-        console.error('Error updating contact:', error);
-        res.status(500).json({ message: 'Internal server error' });
     }
 });
 
