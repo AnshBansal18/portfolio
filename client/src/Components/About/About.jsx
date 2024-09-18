@@ -2,6 +2,8 @@ import React, { Suspense, lazy } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import SkillsSection from './SkillsSection';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'; 
 
 const ImageComponent = lazy(() => import('./ImageComponent'));
 
@@ -23,15 +25,11 @@ const About = () => {
       <main className="bg-custom-bg text-white min-h-screen py-16 px-6 sm:px-10 lg:px-20">
         <section className="container mx-auto flex flex-col-reverse md:flex-row items-center mb-2">
           <article className="md:w-2/3 mb-10 md:mb-0 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-yellow-400 via-red-500 to-orange-600 text-transparent bg-clip-text">
-              Who I Am
-            </h1>
-            <p className="text-lg md:text-xl leading-relaxed bg-gradient-to-r from-white via-gray-100 to-blue-200 text-transparent bg-clip-text shadow-lg rounded-md p-6">
-              Loading data...
-            </p>
+            <Skeleton height={50} width="50%" className="mb-4" />
+            <Skeleton count={4} height={25} className="rounded-md mb-2" />
           </article>
           <figure className="md:w-1/3 flex justify-center mb-10 md:mb-0">
-            <div className="w-48 h-48 bg-gray-300 rounded-full"></div>
+            <Skeleton circle={true} height={192} width={192} />
           </figure>
         </section>
       </main>
@@ -75,7 +73,7 @@ const About = () => {
           </p>
         </article>
         <figure className="md:w-1/3 flex justify-center mb-10 md:mb-0">
-          <Suspense fallback={<div className="w-48 h-48 bg-gray-300 rounded-full"></div>}>
+          <Suspense fallback={<Skeleton circle={true} height={192} width={192} />}>
             <ImageComponent src={imageUrl} />
           </Suspense>
         </figure>
