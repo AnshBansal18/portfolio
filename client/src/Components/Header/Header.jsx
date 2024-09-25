@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FiHome, FiUser, FiMail, FiLayers } from 'react-icons/fi';
 import { RiMenu4Fill } from 'react-icons/ri';
+import { LiaBlogSolid } from "react-icons/lia";
 
 const iconMap = {
   FiHome,
   FiUser,
   FiMail,
   FiLayers,
+  LiaBlogSolid,
 };
 
 const Header = () => {
@@ -24,13 +26,21 @@ const Header = () => {
       { name: 'About', path: '/about', icon: 'FiUser' },
       { name: 'Contacts', path: '/contacts', icon: 'FiMail' },
       { name: 'Projects', path: '/projects', icon: 'FiLayers' },
+      { name: 'Blogs', path: 'https://ace-blogs.vercel.app/', icon: 'LiaBlogSolid', external: true },
     ],
   };
 
   return (
     <header className="bg-transparent backdrop-blur-sm text-white py-3 fixed w-full top-0 z-50 flex items-center justify-between px-4">
       <div className="flex items-center space-x-4">
-        {navData.logo && <img src={navData.logo} alt="Logo" className="h-10 w-10 rounded-full border-2 border-gray-800" />}
+        {navData.logo && (
+          <img
+            src={navData.logo}
+            alt="Logo"
+            className="h-10 w-10 rounded-full border-2 border-gray-800"
+            aria-label="Site Logo"
+          />
+        )}
         <span className="text-xl font-extrabold">{navData.name}</span>
       </div>
 
@@ -39,7 +49,14 @@ const Header = () => {
           const Icon = iconMap[item.icon];
           return (
             Icon && (
-              <Link key={index} to={item.path} className="flex items-center text-lg hover:text-purple-300 transition-colors">
+              <Link
+                key={index}
+                to={item.path}
+                target={item.external ? "_blank" : "_self"} // Open external links in new tab
+                rel={item.external ? "noopener noreferrer" : undefined}
+                className="flex items-center text-lg hover:text-purple-300 transition-colors"
+                aria-label={item.name}
+              >
                 <Icon className="mr-2 text-xl" />
                 {item.name}
               </Link>
@@ -63,8 +80,11 @@ const Header = () => {
                 <Link
                   key={index}
                   to={item.path}
+                  target={item.external ? "_blank" : "_self"} // Open external links in new tab
+                  rel={item.external ? "noopener noreferrer" : undefined}
                   onClick={closeMenu}
                   className="flex items-center text-lg py-2 hover:text-purple-300 transition-colors"
+                  aria-label={item.name}
                 >
                   <Icon className="mr-2 text-xl" />
                   {item.name}
